@@ -200,10 +200,6 @@ class HttpConnector {
         }
     }
     
-    static func getXWwwFormUrlencodedHeaders() -> [String: String] {
-        return ["Content-Type": "application/x-www-form-urlencoded"]
-    }
-    
     func requestWithObjectBody(withApi api: URL?,
                                method: HTTPMethod,
                                body: [String: Any],
@@ -236,17 +232,18 @@ class HttpConnector {
             completion?(getParamsError())
             return nil
         }
-        
         guard var urlRequest = try? URLRequest(url: api).asURLRequest(), let data = try? JSONSerialization.data(withJSONObject: body, options: []) else {
             completion?(getParamsError())
             return nil
         }
         
+        httpHeader.forEach { (headerKey, headerValue) in
+            if urlRequest.value(forHTTPHeaderField: headerKey) == nil {
+                urlRequest.setValue(headerValue, forHTTPHeaderField: headerKey)
+            }
+        }
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
-        if let headerKey = httpHeader.keys.first, urlRequest.value(forHTTPHeaderField: headerKey) == nil, let headerValue = httpHeader[headerKey] {
-            urlRequest.setValue(headerValue, forHTTPHeaderField: headerKey)
         }
         urlRequest.httpBody = data
         urlRequest.httpMethod = method.rawValue
@@ -257,4 +254,3 @@ class HttpConnector {
         })
     }
 }
-

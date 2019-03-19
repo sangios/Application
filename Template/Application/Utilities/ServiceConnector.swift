@@ -45,7 +45,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.request(withApi: URL(string: api),
                                     method: .get,
@@ -72,7 +72,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.request(withApi: URL(string: api),
                                     method: .put,
@@ -99,7 +99,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.request(withApi: URL(string: api),
                                     method: .post,
@@ -126,7 +126,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.request(withApi: URL(string: api),
                                     method: .delete,
@@ -154,7 +154,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.request(withApi: URL(string: api),
                                     method: .patch,
@@ -183,7 +183,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.requestWithObjectBody(withApi: URL(string: api),
                                                   method: .post,
@@ -210,7 +210,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.requestWithObjectBody(withApi: URL(string: api),
                                                   method: .put,
@@ -237,7 +237,7 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token ]
+            headers = [RequestHeader.AuthKey.rawValue : token]
         }
         request = connector.requestWithArrayObjectBody(withApi: URL(string: api),
                                                        method: .put,
@@ -264,9 +264,10 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token, "Content-Type": "application/x-www-form-urlencoded"]
+            headers = [RequestHeader.AuthKey.rawValue : token,
+                       "Content-Type": "application/x-www-form-urlencoded"]
         } else {
-            headers = [ "Content-Type": "application/x-www-form-urlencoded"]
+            headers = ["Content-Type": "application/x-www-form-urlencoded"]
         }
         request = connector.requestWithObjectBody(withApi: URL(string: api),
                                                   method: .post,
@@ -293,9 +294,10 @@ class ServiceConnector: NSObject {
         let requestId = "\(api).\(Date().timeIntervalSince1970)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
-            headers = [ RequestHeader.AuthKey.rawValue : token, "Content-Type": "application/x-www-form-urlencoded"]
+            headers = [RequestHeader.AuthKey.rawValue : token,
+                       "Content-Type": "application/x-www-form-urlencoded"]
         } else {
-            headers = [ "Content-Type": "application/x-www-form-urlencoded"]
+            headers = ["Content-Type": "application/x-www-form-urlencoded"]
         }
         request = connector.requestWithObjectBody(withApi: URL(string: api),
                                                   method: .get,
@@ -314,3 +316,4 @@ class ServiceConnector: NSObject {
         return request
     }
 }
+
