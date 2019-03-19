@@ -22,7 +22,8 @@
 		2525A319223BD60200AD6C17 /* HotKeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525A318223BD60200AD6C17 /* HotKeywordViewModel.swift */; };
 		2525A31D223BD6FD00AD6C17 /* HotKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2525A31B223BD6FD00AD6C17 /* HotKeywordCell.swift */; };
 		2525A31E223BD6FD00AD6C17 /* HotKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2525A31C223BD6FD00AD6C17 /* HotKeywordCell.xib */; };
-		255C20872240A4F100633C8D /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 255C20862240A4F100633C8D /* Fastfile */; };
+		255C208B2240AB4400633C8D /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = 255C20892240AB4400633C8D /* Appfile */; };
+		255C208C2240AB4400633C8D /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 255C208A2240AB4400633C8D /* Fastfile */; };
 		2568ACCF223CADA2004ED3B0 /* HttpConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568ACCE223CADA2004ED3B0 /* HttpConnector.swift */; };
 		2568ACD1223CB32C004ED3B0 /* ServiceConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568ACD0223CB32C004ED3B0 /* ServiceConnector.swift */; };
 		2568ACD4223CB595004ED3B0 /* CloudAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568ACD3223CB595004ED3B0 /* CloudAPI.swift */; };
@@ -77,7 +78,8 @@
 		2525A318223BD60200AD6C17 /* HotKeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeywordViewModel.swift; sourceTree = "<group>"; };
 		2525A31B223BD6FD00AD6C17 /* HotKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeywordCell.swift; sourceTree = "<group>"; };
 		2525A31C223BD6FD00AD6C17 /* HotKeywordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotKeywordCell.xib; sourceTree = "<group>"; };
-		255C20862240A4F100633C8D /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		255C20892240AB4400633C8D /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		255C208A2240AB4400633C8D /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
 		2568ACCE223CADA2004ED3B0 /* HttpConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpConnector.swift; sourceTree = "<group>"; };
 		2568ACD0223CB32C004ED3B0 /* ServiceConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceConnector.swift; sourceTree = "<group>"; };
 		2568ACD3223CB595004ED3B0 /* CloudAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAPI.swift; sourceTree = "<group>"; };
@@ -235,9 +237,18 @@
 		255C20852240A4A400633C8D /* AutoBuild */ = {
 			isa = PBXGroup;
 			children = (
-				255C20862240A4F100633C8D /* Fastfile */,
+				255C20882240AB4400633C8D /* fastlane */,
 			);
 			name = AutoBuild;
+			sourceTree = "<group>";
+		};
+		255C20882240AB4400633C8D /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				255C20892240AB4400633C8D /* Appfile */,
+				255C208A2240AB4400633C8D /* Fastfile */,
+			);
+			path = fastlane;
 			sourceTree = "<group>";
 		};
 		2568ACD2223CB564004ED3B0 /* CloudAPI */ = {
@@ -421,8 +432,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				255C20872240A4F100633C8D /* Fastfile in Resources */,
+				255C208C2240AB4400633C8D /* Fastfile in Resources */,
 				2525A2E9223BCC4400AD6C17 /* LaunchScreen.storyboard in Resources */,
+				255C208B2240AB4400633C8D /* Appfile in Resources */,
 				2525A2E6223BCC4400AD6C17 /* Assets.xcassets in Resources */,
 				2525A2E4223BCC4200AD6C17 /* Main.storyboard in Resources */,
 				2525A31E223BD6FD00AD6C17 /* HotKeywordCell.xib in Resources */,
