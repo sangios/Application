@@ -24,7 +24,7 @@ extension CloudAPI {
             case HTTPCODE.OK:
                 let error = NSError(domain: CloudAPIDomain,
                                     code: HTTPCODE.BAD_CONTENT.rawValue,
-                                    userInfo: nil)
+                                    userInfo: response.data != nil ? ["response": response.data!] : nil)
                 
                 guard let dict = response.data as? [String: Any] else {
                     logger.error(error.localizedDescription)
