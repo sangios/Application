@@ -44,7 +44,7 @@ class HotKeywordCell: UICollectionViewCell {
     func bind(viewModel: HotKeywordViewModel, color: UIColor) {
         keywordLabel.text = viewModel.text
         if let url = viewModel.iconURL {
-            iconImgView.kf.setImage(with: url) {
+            iconImgView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "no_image")) {
                 (img, error, cacheType, url) in
                 if let err = error {
                     logger.error("\(err.localizedDescription)")
