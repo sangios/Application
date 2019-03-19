@@ -39,4 +39,8 @@ class CloudAPI {
     deinit {
 
     }
+    
+    func cancelAllRequests() {
+        connector.cancelAllRequests()
+    }
 }

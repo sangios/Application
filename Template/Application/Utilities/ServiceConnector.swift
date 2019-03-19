@@ -17,7 +17,6 @@ class ServiceConnector: NSObject {
     // MARK: Propertises
     fileprivate var connector: HttpConnector!
     fileprivate var requestsList = [String: DataRequest]()
-    fileprivate var cancelled = false
     
     // MARK: Initialize/Deinitialize
     init(isDelegateInMainQueue: Bool = false) {
@@ -30,9 +29,32 @@ class ServiceConnector: NSObject {
     
     // MARK: Requests Cancellation
     func cancelAllRequests() {
-        cancelled = true
-        for request in requestsList.values {
+        let temp = requestsList
+        requestsList = [String: DataRequest]()
+        for request in temp.values {
             request.cancel()
+        }
+    }
+    
+    func cancel(requestId: String) {
+        if let req = requestsList[requestId] {
+            requestsList[requestId] = nil
+            req.cancel()
+        }
+    }
+    
+    func cancel(api: String) {
+        let temp = requestsList
+        temp.forEach { (key, req) in
+            guard api.count <= key.count else { return }
+            let startIndex = key.startIndex
+            let endIndex = key.index(startIndex, offsetBy: api.count)
+            let range = startIndex..<endIndex
+            if key.range(of: api, options: .literal, range: range, locale: nil) == nil {
+                return
+            }
+            requestsList[key] = nil
+            req.cancel()
         }
     }
     
@@ -42,7 +64,8 @@ class ServiceConnector: NSObject {
                                 token: String? = nil,
                                 completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -53,9 +76,9 @@ class ServiceConnector: NSObject {
                                     header: headers,
                                     completion: { [weak self] (result) in
                                         guard let weakSelf = self else { return }
-                                        guard weakSelf.cancelled == false else { return }
-                                        
+                                        guard weakSelf.requestsList[requestId] != nil else { return }
                                         weakSelf.requestsList[requestId] = nil
+                                        logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                         completion?(result)
         })
         if request != nil {
@@ -69,7 +92,8 @@ class ServiceConnector: NSObject {
                                 token: String? = nil,
                                 completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -80,9 +104,9 @@ class ServiceConnector: NSObject {
                                     header: headers,
                                     completion: { [weak self] (result) in
                                         guard let weakSelf = self else { return }
-                                        guard weakSelf.cancelled == false else { return }
-                                        
+                                        guard weakSelf.requestsList[requestId] != nil else { return }
                                         weakSelf.requestsList[requestId] = nil
+                                        logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                         completion?(result)
         })
         if request != nil {
@@ -96,7 +120,8 @@ class ServiceConnector: NSObject {
                                  token: String? = nil,
                                  completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -107,9 +132,9 @@ class ServiceConnector: NSObject {
                                     header: headers,
                                     completion: { [weak self] (result) in
                                         guard let weakSelf = self else { return }
-                                        guard weakSelf.cancelled == false else { return }
-                                        
+                                        guard weakSelf.requestsList[requestId] != nil else { return }
                                         weakSelf.requestsList[requestId] = nil
+                                        logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                         completion?(result)
         })
         if request != nil {
@@ -123,7 +148,8 @@ class ServiceConnector: NSObject {
                                    token: String? = nil,
                                    completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -134,9 +160,9 @@ class ServiceConnector: NSObject {
                                     header: headers,
                                     completion: { [weak self] (result) in
                                         guard let weakSelf = self else { return }
-                                        guard weakSelf.cancelled == false else { return }
-                                        
+                                        guard weakSelf.requestsList[requestId] != nil else { return }
                                         weakSelf.requestsList[requestId] = nil
+                                        logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                         completion?(result)
         })
         if request != nil {
@@ -151,7 +177,8 @@ class ServiceConnector: NSObject {
                                   completion: ((_ result: APIResponse) -> Void)?) -> DataRequest?
     {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -162,9 +189,9 @@ class ServiceConnector: NSObject {
                                     header: headers,
                                     completion: { [weak self] (result) in
                                         guard let weakSelf = self else { return }
-                                        guard weakSelf.cancelled == false else { return }
-                                        
+                                        guard weakSelf.requestsList[requestId] != nil else { return }
                                         weakSelf.requestsList[requestId] = nil
+                                        logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                         completion?(result)
         })
         if request != nil {
@@ -180,7 +207,8 @@ class ServiceConnector: NSObject {
                                                token: String? = nil,
                                                completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -191,9 +219,9 @@ class ServiceConnector: NSObject {
                                                   httpHeader: headers,
                                                   completion: { [weak self] (result) in
                                                     guard let weakSelf = self else { return }
-                                                    guard weakSelf.cancelled == false else { return }
-                                                    
+                                                    guard weakSelf.requestsList[requestId] != nil else { return }
                                                     weakSelf.requestsList[requestId] = nil
+                                                    logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                                     completion?(result)
         })
         if request != nil {
@@ -207,7 +235,8 @@ class ServiceConnector: NSObject {
                                               token: String? = nil,
                                               completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -218,9 +247,9 @@ class ServiceConnector: NSObject {
                                                   httpHeader: headers,
                                                   completion: { [weak self] (result) in
                                                     guard let weakSelf = self else { return }
-                                                    guard weakSelf.cancelled == false else { return }
-                                                    
+                                                    guard weakSelf.requestsList[requestId] != nil else { return }
                                                     weakSelf.requestsList[requestId] = nil
+                                                    logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                                     completion?(result)
         })
         if request != nil {
@@ -234,7 +263,8 @@ class ServiceConnector: NSObject {
                                                    token: String? = nil,
                                                    completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token]
@@ -245,9 +275,9 @@ class ServiceConnector: NSObject {
                                                        httpHeader: headers,
                                                        completion: { [weak self] (result) in
                                                         guard let weakSelf = self else { return }
-                                                        guard weakSelf.cancelled == false else { return }
-                                                        
+                                                        guard weakSelf.requestsList[requestId] != nil else { return }
                                                         weakSelf.requestsList[requestId] = nil
+                                                        logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                                         completion?(result)
         })
         if request != nil {
@@ -261,7 +291,8 @@ class ServiceConnector: NSObject {
                                                        token: String? = nil,
                                                        completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token,
@@ -275,9 +306,9 @@ class ServiceConnector: NSObject {
                                                   httpHeader: headers,
                                                   completion: { [weak self] (result) in
                                                     guard let weakSelf = self else { return }
-                                                    guard weakSelf.cancelled == false else { return }
-                                                    
+                                                    guard weakSelf.requestsList[requestId] != nil else { return }
                                                     weakSelf.requestsList[requestId] = nil
+                                                    logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                                     completion?(result)
         })
         if request != nil {
@@ -291,7 +322,8 @@ class ServiceConnector: NSObject {
                                                       token: String? = nil,
                                                       completion: ((_ result: APIResponse) -> Void)?) -> DataRequest? {
         var request: DataRequest? = nil
-        let requestId = "\(api).\(Date().timeIntervalSince1970)"
+        let now = Date().timeIntervalSince1970
+        let requestId = "\(api).\(now)"
         var headers: HTTPHeaders = HTTPHeaders()
         if let token = token, token.count > 0 {
             headers = [RequestHeader.AuthKey.rawValue : token,
@@ -305,9 +337,9 @@ class ServiceConnector: NSObject {
                                                   httpHeader: headers,
                                                   completion: { [weak self] (result) in
                                                     guard let weakSelf = self else { return }
-                                                    guard weakSelf.cancelled == false else { return }
-                                                    
+                                                    guard weakSelf.requestsList[requestId] != nil else { return }
                                                     weakSelf.requestsList[requestId] = nil
+                                                    logger.debug("API TIME: \(api):\(Date().timeIntervalSince1970 - now)")
                                                     completion?(result)
         })
         if request != nil {

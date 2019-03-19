@@ -109,6 +109,13 @@ class HttpConnector {
         apiResponse.method = response.request?.httpMethod ?? ""
         apiResponse.api = response.request?.url?.absoluteString ?? ""
         
+        logger.debug("""
+                     CLOUD API CALLED
+                     \(apiResponse.method): \(apiResponse.api)
+                     Res: (\(response.result.value ?? ""))
+                     Err: (\(response.result.error?.localizedDescription ?? ""))
+                     """)
+        
         completion?(apiResponse)
     }
     

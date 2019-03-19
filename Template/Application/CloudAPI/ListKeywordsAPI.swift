@@ -10,7 +10,6 @@ import UIKit
 import ObjectMapper
 
 extension CloudAPI {
-    
     func getKeywords(completion: @escaping ([Keyword], Error?) -> Void) {
         let api = "\(host)\(API.keywords.rawValue)"
         connector.get(api, token: self.token) { (response) in
@@ -51,5 +50,9 @@ extension CloudAPI {
                 completion([], error)
             }
         }
+    }
+    
+    func cancelGetKeywords() {
+        connector.cancel(api: API.keywords.rawValue)
     }
 }
