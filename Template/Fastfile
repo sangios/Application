@@ -1,0 +1,80 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Push a build of Application to TestFlight"
+  lane :application do
+    version_number = get_info_plist_value(path: "./Application/Resources/Info.plist", key: "CFBundleShortVersionString")
+    build_number = get_info_plist_value(path: "./Application/Resources/Info.plist", key: "CFBundleVersion")
+
+    begin
+      #sync_code_signing(type: "appstore")
+      build_app(
+        workspace: "Application.xcworkspace",
+        scheme: "Application",
+        configuration: "Release",
+        clean: true,
+        include_bitcode: true,
+        export_options: {
+          method: "app-store"
+        }
+      )
+
+      upload_to_testflight(skip_waiting_for_build_processing: true)
+
+      slack(
+        slack_url:"https://hooks.slack.com/services/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",
+        channel:"#iosapp",
+        success:true,
+        message: "Successfully distributed a new beta build",
+        attachment_properties: {
+          fields: [
+            {
+              title: "Build version (Application)",
+              value: "#{version_number}(#{build_number})",
+            }
+          ]
+        }
+      )
+
+    rescue => exception
+      slack(
+        slack_url:"https://hooks.slack.com/services/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",
+        channel:"#iosapp",
+        success:false,
+        message: "Something went wrong!",
+        #default_payloads: [:git_branch, :last_git_commit_message],
+          attachment_properties: {
+            fields: [
+              {
+                title: "Build version",
+                value: "#{version_number}(#{build_number})",
+              },
+              {
+                title: "Error Message",
+                value: exception.to_s,
+                short: false
+              }
+            ]
+          }
+        )
+    end
+
+  end
+
+end
