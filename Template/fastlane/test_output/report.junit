@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='ApplicationTests.xctest' tests='12' failures='0'>
+  <testsuite name='ApplicationTests.ApplicationTests' tests='12' failures='0'>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testFourWords' time='0.004'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testFourWords2' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testFourWords3' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testFourWords4' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testFourWords5' time='0.002'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testFourWords6' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testOneWord' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testPerformanceExample' time='0.480'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testThreeWords' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testThreeWords2' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testThreeWords3' time='0.001'/>
+    <testcase classname='ApplicationTests.ApplicationTests' name='testTwoWords' time='0.001'/>
+  </testsuite>
+</testsuites>

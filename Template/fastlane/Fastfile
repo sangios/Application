@@ -74,7 +74,19 @@ platform :ios do
           }
         )
     end
+  end
 
+
+  lane :tests do
+    run_tests(workspace: "Application.xcworkspace",
+    devices: ["iPhone Xs Max"],
+    scheme: "ApplicationTests")
+  end
+
+  lane :ui_tests do
+    run_tests(workspace: "Application.xcworkspace",
+    devices: ["iPhone Xs Max"],
+    scheme: "ApplicationUITests")
   end
 
 end
