@@ -241,13 +241,13 @@
 		2568ACD7223CC591004ED3B0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				250516FB223D49F80023A6F2 /* Logger.swift */,
 				2568ACDC223CD021004ED3B0 /* NSObject.swift */,
 				2568ACDE223D095F004ED3B0 /* Utilities.swift */,
 				2568ACE0223D0DBF004ED3B0 /* UIColor+Ext.swift */,
 				2568ACE2223D0E70004ED3B0 /* String+Ext.swift */,
 				2568ACCE223CADA2004ED3B0 /* HttpConnector.swift */,
 				2568ACD0223CB32C004ED3B0 /* ServiceConnector.swift */,
-				250516FB223D49F80023A6F2 /* Logger.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

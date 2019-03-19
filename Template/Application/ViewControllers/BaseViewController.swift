@@ -13,17 +13,17 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        logger.info("\(self.nameOfClass)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        logger.info("\(self.nameOfClass)")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+        logger.info("\(self.nameOfClass)")
     }
     
     func showLoadingView() {

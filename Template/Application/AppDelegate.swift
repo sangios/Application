@@ -18,29 +18,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         SetupLogger()
-        logger.info("")
+        logger.info("APP STARTED")
                 
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-
+        logger.info("APP RESIGN ACTIVE")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-
+        logger.info("APP ENTER BACKGROUND")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-
+        logger.info("APP ENTER FOREGROUND")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-
+        logger.info("APP BECOME ACTIVE")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-
+        logger.info("APP ENDED")
     }
 }
 
